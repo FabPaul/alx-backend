@@ -72,12 +72,9 @@ class Server:
                 value += 1
                 next_index += 1
 
-        
         return {
             'index': index,
             'data': data,
             'page_size': page_size,
             'next_index': next_index
-            
-            
         }
