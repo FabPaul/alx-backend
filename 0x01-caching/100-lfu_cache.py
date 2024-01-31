@@ -21,24 +21,23 @@ class LFUCache(BaseCaching):
         else:
             if len(self.cache_data) >= BaseCaching.MAX_ITEMS\
                     and key not in self.cache_data:
-                  min_freq = min(self.frequency.values())
-                  least_freq_keys = []
-                  for k, freq in self.frequency.items():
-                      if freq == min_freq:
-                          least_freq_keys.append(k)
-                
-                  # if more than 1 item with least freq use LRU to find the least
-                  if len(least_freq_keys) > 1:
-                      lru_key = min(least_freq_keys,\
-                                    key=lambda k: self.timestamp[k])
-                  else:
-                      lru_key = least_freq_keys[0]
+                min_freq = min(self.frequency.values())
+                least_freq_keys = []
+                for k, freq in self.frequency.items():
+                    if freq == min_freq:
+                        least_freq_keys.append(k)
 
-                  
-                  print(f"DISCARD: {lru_key}")
-                  self.cache_data.pop(lru_key)
-                  self.frequency.pop(lru_key)
-                  self.timestamp.pop(lru_key)
+                # if more than 1 item with least freq use LRU to find the least
+                if len(least_freq_keys) > 1:
+                    lru_key = min(least_freq_keys,
+                                  key=lambda k: self.timestamp[k])
+                else:
+                    lru_key = least_freq_keys[0]
+
+                print(f"DISCARD: {lru_key}")
+                self.cache_data.pop(lru_key)
+                self.frequency.pop(lru_key)
+                self.timestamp.pop(lru_key)
 
             self.cache_data[key] = item
 
