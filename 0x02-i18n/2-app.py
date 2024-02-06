@@ -2,7 +2,11 @@
 """Basic flask app"""
 
 
-from flask import Flask, render_template
+from flask import (
+    Flask,
+    render_template,
+    request
+)
 from flask_babel import Babel
 
 
@@ -20,7 +24,16 @@ class Config(object):
 @app.route('/')
 def index_0():
     """function that returns Welcome to Holberton"""
-    return render_template('1-index.html')
+    return render_template('2-index.html')
+
+@request.accept_languages
+def get_locale():
+    """If the user is logged in, use the locale from the user settings"""
+    user = getattr(request, 'user', None)
+    if user is not None:
+        return user.locale
+    
+    return request.accept_languages.best_match(app.config["LANGUAGES"])
 
 
 if __name__=='__main__':
