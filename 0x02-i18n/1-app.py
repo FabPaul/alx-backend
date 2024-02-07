@@ -17,11 +17,12 @@ class Config(object):
     BABEL_DEFAULTLOCALE = "en"
     BABEL_DEFAULT_TIMEZONE = "UTC"
 
+
 @app.route('/')
 def index_0():
     """function that returns Welcome to Holberton"""
     return render_template('1-index.html')
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
     app.run(debug=True)

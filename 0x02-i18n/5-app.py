@@ -25,7 +25,9 @@ class Config(object):
     BABEL_DEFAULTLOCALE = "en"
     BABEL_DEFAULT_TIMEZONE = "UTC"
 
+
 app.config.from_object(Config)
+
 
 users = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
@@ -34,10 +36,12 @@ users = {
     4: {"name": "Teletubby", "locale": None, "timezone": "Europe/London"},
 }
 
+
 @app.route('/')
 def index_0():
     """function that returns Welcome to Holberton"""
     return render_template('5-index.html')
+
 
 @babel.localeselector
 def get_locale():
@@ -48,17 +52,20 @@ def get_locale():
             return requested_locale
     return request.accept_languages.best_match(app.config["LANGUAGES"])
 
+
 def get_user():
     """Get user information from the mock database"""
-    user_id =  request.args.get('login_as')
+    user_id = request.args.get('login_as')
     if user_id:
         return users.get(int(user_id))
     return None
+
 
 @app.before_request
 def before_request():
     """find a user if any and set it as a global on flask"""
     g.user = get_user()
+
 
 @app.before_request
 def before_request():
@@ -67,5 +74,5 @@ def before_request():
     g.user = get_user(int(user_id)) if user_id else None
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
     app.run(debug=True)
