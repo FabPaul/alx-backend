@@ -8,8 +8,7 @@ from flask import (
     request
 )
 from flask_babel import (
-    Babel,
-    _
+    Babel
 )
 
 
