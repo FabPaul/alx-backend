@@ -27,6 +27,7 @@ class Config(object):
 
 
 app.config.from_object(Config)
+"""load config settings"""
 
 
 users = {
