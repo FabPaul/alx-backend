@@ -1,6 +1,6 @@
 import { createClient } from 'redis';
 
-const client = await createClient()
+const client = createClient()
 
 client.on_connect('connect', () => {
     console.log('Redis client connected to the server');
